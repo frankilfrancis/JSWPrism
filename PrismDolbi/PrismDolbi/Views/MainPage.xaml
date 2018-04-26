@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PrismDolbi.Views.MainPage"
+			 BackgroundColor="#d8d7d8">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<ActivityIndicator Grid.RowSpan="2"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       IsVisible="True"
+                       IsEnabled="True"
+                       x:Name="syncIndicator"/>
+		<Image Grid.RowSpan="1" Source="welcome" Aspect="AspectFill" />
+		<BoxView Grid.RowSpan="1" BackgroundColor="#d8d7d8" Opacity="0.8" />
+		
+		<StackLayout VerticalOptions="Center" Spacing="0">
+			<Image Source="factory" />
+			<!--<Label HorizontalTextAlignment="Center" FontSize="30" TextColor="White" Text="SMS Steel APP" FontAttributes="Bold" />-->
+		</StackLayout>
+
+		<StackLayout  Grid.Row="1" Padding="30" BackgroundColor="#d8d7d8">
+			<Image Grid.RowSpan="1" Source="Sms" Aspect="AspectFit" />
+			<!--<Label HorizontalTextAlignment="Center" FontSize="30" TextColor="White" Text="SMI Mobile" FontAttributes="Bold" />-->
+			<Button  Command="{Binding NavigateCommand}" BackgroundColor="#83b7ef" BorderRadius="2" Text="Enter" VerticalOptions="End" FontAttributes="Bold" FontSize="Large" TextColor="White" />
+		</StackLayout>
+	</Grid>
+</ContentPage>

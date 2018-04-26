@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+			 xmlns:local="clr-namespace:PrismDolbi.Helper;assembly=PrismDolbi"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="PrismDolbi.Views.ConArcProd"
+			 Title="{Binding Title}">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<DataTemplate x:Key="ProcessParameter">
+				<ViewCell>
+					<ViewCell.View>
+						<StackLayout>
+							<Grid BackgroundColor="White">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="100"></ColumnDefinition>
+									<ColumnDefinition Width="50"></ColumnDefinition>
+									<ColumnDefinition Width="1*"></ColumnDefinition>
+									<ColumnDefinition Width="1*"></ColumnDefinition>
+									<ColumnDefinition Width="1*"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0" Text="{Binding PARAMETER }" HorizontalOptions="Fill" BackgroundColor="White"  HorizontalTextAlignment="Start" Margin="1" />
+								<Label Grid.Column="1" Text="{Binding UNIT}"  HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="2" Text="{Binding TOTAL_SHELL}" FontAttributes="Bold" HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="3" Text="{Binding PRE_TOTAL_SHEEL }"  HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="4" Text="{Binding Till_TOTAL_SHELL}"  HorizontalOptions="Fill" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+							</Grid>
+						</StackLayout>
+					</ViewCell.View>
+				</ViewCell>
+			</DataTemplate>
+			<DataTemplate x:Key ="ProcessHeader">
+				<ViewCell>
+					<ViewCell.View>
+						<StackLayout>
+							<Grid BackgroundColor="White">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="100"></ColumnDefinition>
+									<ColumnDefinition Width="50"></ColumnDefinition>
+									<ColumnDefinition Width="1*"></ColumnDefinition>
+									<ColumnDefinition Width="1*"></ColumnDefinition>
+									<ColumnDefinition Width="1*"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0" Text="{Binding PARAMETER }" HorizontalOptions="FillAndExpand" BackgroundColor="#83b7ef"  FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="1" Text=" "  HorizontalOptions="FillAndExpand" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="2" Text=" " HorizontalOptions="FillAndExpand" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="3" Text=" "  HorizontalOptions="FillAndExpand" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+								<Label Grid.Column="4" Text=" "  HorizontalOptions="FillAndExpand" BackgroundColor="White" HorizontalTextAlignment="Center" Margin="1" />
+							</Grid>
+						</StackLayout>
+					</ViewCell.View>
+				</ViewCell>
+			</DataTemplate>
+
+			<local:ListDataSelector x:Key ="ListDataSelector" 
+									ProcessHeader="{StaticResource ProcessHeader }" 
+									ProcessParameter="{StaticResource ProcessParameter}" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<StackLayout>
+			<StackLayout HorizontalOptions="FillAndExpand" 
+                   Orientation="Horizontal">
+				<Grid BackgroundColor="#83b7ef" HorizontalOptions="FillAndExpand">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30"></RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="100"></ColumnDefinition>
+						<ColumnDefinition Width="50"></ColumnDefinition>
+						<ColumnDefinition Width="1*"></ColumnDefinition>
+						<ColumnDefinition Width="1*"></ColumnDefinition>
+						<ColumnDefinition Width="1*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Label Text="Param" HorizontalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="0" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalTextAlignment="Start" />
+					<Label Text="UOM" HorizontalOptions="CenterAndExpand" Grid.Column="1" Grid.Row="0" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Cur." HorizontalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="2" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="Prev." HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="3" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalTextAlignment="Center" />
+					<Label Text="TillDt." HorizontalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="4" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalTextAlignment="Center" />
+				</Grid>
+			</StackLayout>
+			<ListView BackgroundColor="White"
+                CachingStrategy="RecycleElement"
+                IsPullToRefreshEnabled="True"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                ItemsSource="{Binding Items}"
+                RefreshCommand="{Binding RefreshCommand}"
+                RowHeight="50"
+				SelectedItem="{Binding SelectedItem, Mode=TwoWay}" HasUnevenRows="True" 
+					  ItemTemplate="{StaticResource ListDataSelector }"/>
+
+			<StackLayout HorizontalOptions="Center"  Orientation="Horizontal">
+				<Grid BackgroundColor="#83b7ef">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*"></ColumnDefinition>
+						<ColumnDefinition Width="1*"></ColumnDefinition>
+						<ColumnDefinition Width="1*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Label Text="Area :- Meltshop"  Grid.Column="0" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalOptions="StartAndExpand"/>
+					<Button BackgroundColor="#83b7ef" Grid.Column="1" Command="{Binding RefreshCommand}" Text="Refresh" TextColor="White" />
+					<Label Text="{Binding RefreshTime, Mode=TwoWay}"  Grid.Column="2" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#83b7ef" TextColor="White" HorizontalOptions="CenterAndExpand"/>
+				</Grid>
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+  
+</ContentPage>
