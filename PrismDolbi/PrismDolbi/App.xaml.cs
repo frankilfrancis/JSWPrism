@@ -6,6 +6,9 @@ using PrismDolbi.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace PrismDolbi
@@ -27,8 +30,9 @@ namespace PrismDolbi
         {
             InitializeComponent();
 			//CloudService = new AzureCloudService();
-
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+			AppCenter.Start("android=dd830de8-6bc6-47d2-a4a5-b54acf52de93;",
+				  typeof(Analytics), typeof(Crashes));
+			await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
