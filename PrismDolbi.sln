@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDolbi", "PrismDolbi\PrismDolbi\PrismDolbi.csproj", "{372EE8E8-015D-45BB-A3A5-66C0F1D5C580}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismDolbi", "PrismDolbi\PrismDolbi\PrismDolbi.csproj", "{372EE8E8-015D-45BB-A3A5-66C0F1D5C580}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismDolbi.Android", "PrismDolbi\PrismDolbi.Android\PrismDolbi.Android.csproj", "{A5C3E371-AC5B-4A2B-90B6-8D918950C3C0}"
 EndProject

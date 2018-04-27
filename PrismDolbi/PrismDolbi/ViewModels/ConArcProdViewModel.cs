@@ -31,7 +31,7 @@ namespace PrismDolbi.ViewModels
 			set { SetProperty(ref items, value, "Items"); }
 		}
 
-		string updateDateTim = string.Format("Update Time: - {0}", DateTime.Today.ToString("g"));
+		string updateDateTim = string.Format("Update Time: - {0}", DateTime.Today.ToString("d"));
 		public string RefreshTime
 		{
 			get { return updateDateTim; }
@@ -106,7 +106,8 @@ namespace PrismDolbi.ViewModels
 			{
 				var table =service.GetTable<ConArcProd>();
 				var list = await table.ReadAllItemsAsync();
-				updateDateTim = string.Format("Update Time: - {0}", list.Select(x => x.DATE_TIME).FirstOrDefault().ToString());
+				var UpdateTime = list.Select(x => x.DATE_TIME).FirstOrDefault().ToString();
+				RefreshTime = string.Format("Update Time: - {0}", UpdateTime.Substring(0,16));
 			}
 			catch (Exception ex)
 			{
