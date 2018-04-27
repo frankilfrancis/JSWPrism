@@ -9,6 +9,7 @@ using Prism.Unity;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using System;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace PrismDolbi
@@ -28,23 +29,41 @@ namespace PrismDolbi
 
 		protected override async void OnInitialized()
         {
-            InitializeComponent();
-			//CloudService = new AzureCloudService();
-			AppCenter.Start("android=dd830de8-6bc6-47d2-a4a5-b54acf52de93;",
-				  typeof(Analytics), typeof(Crashes));
-			await NavigationService.NavigateAsync("NavigationPage/MainPage");
+			try
+			{
+				InitializeComponent();
+				//CloudService = new AzureCloudService();
+				AppCenter.Start("android=dd830de8-6bc6-47d2-a4a5-b54acf52de93;" +
+								"ios={Your iOS App secret here}",
+								typeof(Analytics), typeof(Crashes));
+				await NavigationService.NavigateAsync("NavigationPage/MainPage");
+			}
+			catch (Exception ex)
+			{
+
+				Crashes.TrackError(ex);
+			}
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage>();
-			containerRegistry.RegisterForNavigation<ConArcProd>();
+			try
+			{
+				containerRegistry.RegisterForNavigation<NavigationPage>();
+				containerRegistry.RegisterForNavigation<MainPage>();
+				containerRegistry.RegisterForNavigation<ConArcProd>();
 
 
-			// services 
+				// services 
 
-			containerRegistry.RegisterSingleton<ICloudService, AzureCloudService>();
+				containerRegistry.RegisterSingleton<ICloudService, AzureCloudService>();
+			}
+			catch (Exception ex)
+			{
+
+				Crashes.TrackError(ex);
+			}
+			
 		}
     }
 }

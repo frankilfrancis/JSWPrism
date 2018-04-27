@@ -8,6 +8,7 @@ using Prism.Navigation;
 using PrismDolbi.Models;
 using PrismDolbi.Abstractions;
 using Prism.Services;
+using Microsoft.AppCenter.Crashes;
 
 namespace PrismDolbi.ViewModels
 {
@@ -81,6 +82,7 @@ namespace PrismDolbi.ViewModels
 			catch (Exception ex)
 			{
 				Debug.WriteLine($"[ConArcProd] Error loading items: {ex.Message}");
+				Crashes.TrackError(ex);
 			}
 			finally
 			{
@@ -109,6 +111,7 @@ namespace PrismDolbi.ViewModels
 			catch (Exception ex)
 			{
 				Debug.WriteLine($"[ConArcProd] Error loading in DateTime: {ex.Message}");
+				Crashes.TrackError(ex);
 			}
 			finally
 			{
